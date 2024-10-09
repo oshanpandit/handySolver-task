@@ -1,11 +1,23 @@
 import { useState } from 'react';
+import TaskModal from './TaskModal'
 
 function App() {
+  const [isModalOpen,setIsModalOpen]=useState(false);
+  const [taskList,setTaskList]=useState([]);
+  
+  const handleOpenModal = () => {
+    setIsModalOpen(true); 
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false); 
+  };
+
   return (
     <>
       <div className="task-container">
         <div className="task-header">
-          <button className="create-task-btn">
+          <button className="create-task-btn" onClick={handleOpenModal}>
             <span>Create New Task</span>
             <span className="plus-icon">+</span>
           </button>
@@ -50,7 +62,13 @@ function App() {
                   </select>
                 </td>
                 <td>
-                  <input type="text" placeholder="Assign Members" />
+                <select>
+                    <option>Assign Team Member</option>
+                    <option>Team Member 1</option>
+                    <option>Team Member 2</option>
+                    <option>Team Member 3</option>
+                    <option>Team Member 4</option>
+                  </select>
                 </td>
                 <td>
                   <input type="date" />
@@ -62,7 +80,7 @@ function App() {
                   </select>
                 </td>
                 <td>
-                  <input type="number" placeholder="Hours" />
+                  <input type="time" placeholder="Hours" />
                 </td>
                 <td>
                   <select>
@@ -81,51 +99,35 @@ function App() {
               </tr>
             </thead>
             <tbody>
-          
-              <tr>
-                <td><i className="fa-solid fa-bars"></i></td>
-                <td>1001</td>
-                <td>Design Login Page</td>
-                <td>TID-20231001</td>
-                <td>In Progress</td>
-                <td>John Doe</td>
-                <td>2023-10-15</td>
-                <td>Yes</td>
-                <td>5</td>
-                <td>High</td>
-                <td>2023-10-10</td>
-                <td>
-                  <div className="icon-container">
-                    <i className="fa-solid fa-pencil"></i>
-                    <i className="fa-solid fa-trash"></i>
-                  </div>
-                </td>
-              </tr>
+             
+            {taskList.map((item, index) => (
+             <tr key={index}> {/* Add a unique key prop here */}
+             <td><i className="fa-solid fa-bars"></i></td>
+             <td>{item.serialNo}</td>
+             <td>{item.title}</td>
+             <td>TID-20231001</td>
+             <td>{item.status}</td>
+             <td>{item.assignedMember}</td>
+             <td>{item.dueDate}</td>
+             <td>{item.isAssigned}</td>
+             <td>{item.estimatedHours}</td>
+             <td>{item.priorityType}</td>
+             <td>{item.creationDate}</td>
+             <td>
+             <div className="icon-container">
+             <i className="fa-solid fa-pencil"></i>
+             <i className="fa-solid fa-trash"></i>
+             </div>
+             </td>
+             </tr>
+        ))}
 
-              <tr>
-                <td><i className="fa-solid fa-bars"></i></td>
-                <td>1001</td>
-                <td>Design Login Page khalli walli i love you</td>
-                <td>TID-20231001</td>
-                <td>In Progress</td>
-                <td>John Doe</td>
-                <td>2023-10-15</td>
-                <td>Yes</td>
-                <td>5</td>
-                <td>High</td>
-                <td>2023-10-10</td>
-                <td>
-                  <div className="icon-container">
-                    <i className="fa-solid fa-pencil"></i>
-                    <i className="fa-solid fa-trash"></i>
-                  </div>
-                </td>
-              </tr>
-
+              
             </tbody>
           </table>
         </div>
       </div>
+      <TaskModal isOpen={isModalOpen} onClose={handleCloseModal} setTaskList={setTaskList} taskList={taskList}/>
     </>
   );
 }
