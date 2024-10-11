@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-// import './Modal.scss';
+import { addToTaskList } from './http';
 
 const Modal = ({ isOpen, onClose,setTaskList,taskList}) => {
   
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
     const formData=new FormData(e.target);
     let formObject=Object.fromEntries(formData.entries());
@@ -11,10 +11,13 @@ const Modal = ({ isOpen, onClose,setTaskList,taskList}) => {
     const year = currentDate.getFullYear();
     const month = String(currentDate.getMonth() + 1).padStart(2, '0'); // Months are zero-indexed, so we add 1
     const day = String(currentDate.getDate()).padStart(2, '0');
-    const formattedDate = `${year}-${month}-${day}`;
-    formObject={...formObject,serialNo:(taskList.length+1).toString(),creationDate:formattedDate}
+    const formattedDate = `${year }-${month}-${day}`;
+    formObject={...formObject,id:(taskList.length+1).toString(),creationDate:formattedDate}
     console.log(formObject);
-    setTaskList((prev)=>[...prev,formObject]);
+    const resp=await addToTaskList(formObject);
+    if(resp){
+      setTaskList((prev)=>[...prev,formObject]);
+    }
     onClose(); 
   };
 

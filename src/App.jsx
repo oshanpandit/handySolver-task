@@ -1,44 +1,19 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import TaskModal from './TaskModal';
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import { getTaskList } from './http';
 
 function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [taskList, setTaskList] = useState([
-    {
-      serialNo: '1',
-      title: "Task 1",
-      status: "Uninitiated",
-      assignedMember: "Team Member 2",
-      dueDate: "2024-10-06",
-      isAssigned: "Yes",
-      estimatedHours: "13:16",
-      priorityType: "Low",
-      creationDate: "2024-10-10"
-    },
-    {
-      serialNo: '2',
-      title: "Task 2",
-      status: "In Progress",
-      assignedMember: "Team Member 1",
-      dueDate: "2024-10-12",
-      isAssigned: "Yes",
-      estimatedHours: "08:30",
-      priorityType: "High",
-      creationDate: "2024-10-09"
-    },
-    {
-      serialNo: '3',
-      title: "Task 3",
-      status: "Completed",
-      assignedMember: "Team Member 3",
-      dueDate: "2024-10-15",
-      isAssigned: "No",
-      estimatedHours: "05:00",
-      priorityType: "Medium",
-      creationDate: "2024-10-08"
-    }
-  ]);
+  const [taskList, setTaskList] = useState([]);
+
+  useEffect(()=>{
+     const getTasks=async()=>{
+        const resp=await getTaskList();
+        setTaskList(resp);
+     }
+       getTasks();
+  },[])
 
   const handleOpenModal = () => {
     setIsModalOpen(true);
@@ -150,13 +125,13 @@ function App() {
                   </thead>
                   <tbody>
                     {taskList.map((item, index) => (
-                      <Draggable key={item.serialNo} draggableId={item.serialNo} index={index}>
+                      <Draggable key={item.id} draggableId={item.id} index={index}>
                         {(provided) => (
                           <tr ref={provided.innerRef} {...provided.draggableProps}>
                             <td {...provided.dragHandleProps}><i className="fa-solid fa-bars"></i></td>
-                            <td>{item.serialNo}</td>
+                            <td>{index+1}</td>
                             <td>{item.title}</td>
-                            <td>TID-20231001</td>
+                            <td>TID-{item.id}</td>
                             <td>{item.status}</td>
                             <td>{item.assignedMember}</td>
                             <td>{item.dueDate}</td>

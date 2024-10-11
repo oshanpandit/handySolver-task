@@ -1,0 +1,37 @@
+{
+  "taskList": [
+    {
+      "id": "1",
+      "title": "Task 1",
+      "status": "Uninitiated",
+      "assignedMember": "Team Member 2",
+      "dueDate": "2024-10-06",
+      "isAssigned": "Yes",
+      "estimatedHours": "13:16",
+      "priorityType": "Low",
+      "creationDate": "2024-10-10"
+    },
+    {
+      "id": "2",
+      "title": "Task 2",
+      "status": "In Progress",
+      "assignedMember": "Team Member 1",
+      "dueDate": "2024-10-12",
+      "isAssigned": "Yes",
+      "estimatedHours": "08:30",
+      "priorityType": "High",
+      "creationDate": "2024-10-09"
+    },
+    {
+      "id": "3",
+      "title": "Task 3",
+      "status": "Completed",
+      "assignedMember": "Team Member 3",
+      "dueDate": "2024-10-15",
+      "isAssigned": "No",
+      "estimatedHours": "05:00",
+      "priorityType": "Medium",
+      "creationDate": "2024-10-08"
+    }
+  ]
+}
