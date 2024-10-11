@@ -1,19 +1,21 @@
 import { useEffect, useState } from 'react';
 import TaskModal from './TaskModal';
-import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { getTaskList } from './http';
 
 function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [taskList, setTaskList] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 4;
 
-  useEffect(()=>{
-     const getTasks=async()=>{
-        const resp=await getTaskList();
-        setTaskList(resp);
-     }
-       getTasks();
-  },[])
+  useEffect(() => {
+    const getTasks = async () => {
+      const resp = await getTaskList();
+      setTaskList(resp);
+    };
+    getTasks();
+  }, []);
 
   const handleOpenModal = () => {
     setIsModalOpen(true);
@@ -23,17 +25,37 @@ function App() {
     setIsModalOpen(false);
   };
 
-  const handleDragEnd = (result) => {
+  const handleDragEnd = async(result) => {
     if (!result.destination) {
       return; // Dropped outside the list
     }
 
-    const reorderedTasks = Array.from(taskList);
-    const [movedTask] = reorderedTasks.splice(result.source.index, 1);
-    reorderedTasks.splice(result.destination.index, 0, movedTask);
+    // Calculate starting index for the current page
+    const startIndex = (currentPage - 1) * itemsPerPage;
 
+    // Adjust the index to match the position in the full task list
+    const sourceIndex = result.source.index + startIndex;
+    const destinationIndex = result.destination.index + startIndex;
+
+    const reorderedTasks = Array.from(taskList);
+    const [movedTask] = reorderedTasks.splice(sourceIndex, 1);
+    reorderedTasks.splice(destinationIndex, 0, movedTask);
     setTaskList(reorderedTasks);
   };
+
+  // Calculate tasks for the current page
+  const currentTasks = taskList.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  );
+
+  const totalPages = Math.ceil(taskList.length / itemsPerPage);
+
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
+  // filter condition
 
   return (
     <>
@@ -47,7 +69,7 @@ function App() {
 
         <div className="task-table">
           <DragDropContext onDragEnd={handleDragEnd}>
-            <Droppable droppableId='droppable'>
+            <Droppable droppableId="droppable">
               {(provided) => (
                 <table ref={provided.innerRef} {...provided.droppableProps}>
                   <thead>
@@ -73,7 +95,7 @@ function App() {
                         {/* <input type="text" placeholder="Serial No." /> */}
                       </td>
                       <td>
-                        <input type="text" placeholder="Search Task Title" />
+                        <input type="text" placeholder="Search Task Title" onChange={(e)=>filterCondtn(e.target.value)}/>
                       </td>
                       <td>
                         <input type="text" placeholder="Search ID" />
@@ -124,12 +146,21 @@ function App() {
                     </tr>
                   </thead>
                   <tbody>
-                    {taskList.map((item, index) => (
-                      <Draggable key={item.id} draggableId={item.id} index={index}>
+                    {currentTasks.map((item, index) => (
+                      <Draggable
+                        key={item.id}
+                        draggableId={item.id}
+                        index={index}
+                      >
                         {(provided) => (
-                          <tr ref={provided.innerRef} {...provided.draggableProps}>
-                            <td {...provided.dragHandleProps}><i className="fa-solid fa-bars"></i></td>
-                            <td>{index+1}</td>
+                          <tr
+                            ref={provided.innerRef}
+                            {...provided.draggableProps}
+                          >
+                            <td {...provided.dragHandleProps}>
+                              <i className="fa-solid fa-bars"></i>
+                            </td>
+                            <td>{index + 1 + (currentPage - 1) * itemsPerPage}</td>
                             <td>{item.title}</td>
                             <td>TID-{item.id}</td>
                             <td>{item.status}</td>
@@ -151,14 +182,33 @@ function App() {
                     ))}
                     {provided.placeholder}
                   </tbody>
-                  {provided.placeholder}
                 </table>
               )}
             </Droppable>
           </DragDropContext>
         </div>
+
+        {/* Pagination */}
+        <div className="pagination">
+          {[...Array(totalPages).keys()].map((pageNumber) => (
+            <button
+              key={pageNumber + 1}
+              onClick={() => handlePageChange(pageNumber + 1)}
+              className={`page-btn ${
+                currentPage === pageNumber + 1 ? 'active' : ''
+              }`}
+            >
+              {pageNumber + 1}
+            </button>
+          ))}
+        </div>
       </div>
-      <TaskModal isOpen={isModalOpen} onClose={handleCloseModal} setTaskList={setTaskList} taskList={taskList} />
+      <TaskModal
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+        setTaskList={setTaskList}
+        taskList={taskList}
+      />
     </>
   );
 }
