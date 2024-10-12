@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { addToTaskList } from './http';
-
+import { addToTaskList } from '../http';
+import './TaskModal.scss'
 const Modal = ({ isOpen, onClose,setTaskList,taskList}) => {
   
   const handleSubmit = async(e) => {
@@ -38,6 +38,7 @@ const Modal = ({ isOpen, onClose,setTaskList,taskList}) => {
             <input
               type="text"
               name="title"
+              placeholder='Enter Title'
               required
             /></div>
           </div>
@@ -49,7 +50,7 @@ const Modal = ({ isOpen, onClose,setTaskList,taskList}) => {
               name="status"
               required
             >
-            <option>Select Status</option>
+            <option selected value={'N/A'}>Select Status</option>
             <option>Uninitiated</option>
             <option>In Progress</option>
             <option>Completed</option>
@@ -62,9 +63,8 @@ const Modal = ({ isOpen, onClose,setTaskList,taskList}) => {
             <div className='form-field-input'>
             <select
               name="assignedMember"
-              required
             >
-            <option>Select Assigned Team Members</option>
+            <option selected value={'N/A'}>Select Team Member</option>
             <option>Team Member 1</option>
             <option>Team Member 2</option>
             <option>Team Member 3</option>
@@ -92,7 +92,7 @@ const Modal = ({ isOpen, onClose,setTaskList,taskList}) => {
               name="isAssigned"
               required
             >
-            <option>Select is Assigned</option>
+            <option selected value={'N/A'}>Select is Assigned</option>
             <option>Yes</option>
             <option>No</option>
             </select>
@@ -117,7 +117,7 @@ const Modal = ({ isOpen, onClose,setTaskList,taskList}) => {
               name="priorityType"
               required
             >
-            <option>Select Priority</option>
+            <option selected value={'N/A'}>Select Priority</option>
             <option>Low</option>
             <option>Medium</option>
             <option>High</option>

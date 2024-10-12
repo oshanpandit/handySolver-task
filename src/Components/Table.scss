@@ -1,0 +1,83 @@
+.task-table {
+    width: 100%;
+    overflow-x: auto;
+    table {
+      width: 100%;
+      border-collapse: collapse;
+
+      .filter-icon {
+        font-size: 1.3rem;
+        color: black;
+      }
+
+      // .action-icons {
+      //   display: flex; // Use flexbox for alignment
+      //   justify-content: center; // Center the icons horizontally
+      //   align-items: center; // Center the icons vertically
+      //   height: 100%; // Ensure the action cell takes the full height of the row
+
+        .icon-container {
+          display: flex; // Use flexbox to align icons
+          i {
+            margin: 0 10px; // Add margin between the icons
+            cursor: pointer; // Change cursor to pointer for better UX
+            transition: color 0.3s; // Smooth transition for hover effect
+
+            &:hover {
+              color: #5f6264; // Change color on hover
+            }
+          }
+        }
+      // }
+
+      th,
+      td {
+        padding: 12px;
+        border: 1px solid #ccc;
+        text-align: center;
+        vertical-align: middle; // Ensure vertical alignment in all cells
+        height: 60px; // Set a fixed height for all cells (optional, adjust as needed)
+      }
+
+      th {
+        background-color: #FCD19C; /* Orange shade */
+        color: black;
+      }
+
+      thead tr:nth-child(2) {
+        background-color: #FCD19C; /* Change this to the desired color */
+      }
+
+      input[type="text"],
+      input[type="date"],
+      input[type="number"],
+      select {
+        width: 100%;
+        padding: 6px;
+        box-sizing: border-box;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+
+      button {
+        padding: 6px 12px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        background-color: #f0a960;
+        color: white;
+
+        &:hover {
+          background-color: #e09d50;
+        }
+      }
+
+      button.delete {
+        background-color: #e74c3c;
+
+        &:hover {
+          background-color: #c0392b;
+        }
+      }
+    }
+  }
