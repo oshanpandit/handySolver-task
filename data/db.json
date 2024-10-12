@@ -1,124 +1,70 @@
 {
   "taskList": [
     {
-      "id": "1",
-      "title": "Task 1",
+      "id": "TID-1",
+      "title": "Make Presentation",
       "status": "Uninitiated",
       "assignedMember": "Team Member 2",
       "dueDate": "2024-10-06",
       "isAssigned": "Yes",
       "estimatedHours": "13:16",
       "priorityType": "Low",
-      "creationDate": "2024-10-10",
-      "order": 2
+      "creationDate": "2024-10-10"
     },
     {
-      "id": "2",
-      "title": "Task 2",
+      "id": "TID-2",
+      "title": "Brief Client",
       "status": "In Progress",
       "assignedMember": "Team Member 1",
       "dueDate": "2024-10-12",
       "isAssigned": "Yes",
       "estimatedHours": "08:30",
       "priorityType": "High",
-      "creationDate": "2024-10-09",
-      "order": 0
+      "creationDate": "2024-10-09"
     },
     {
-      "id": "3",
-      "title": "Task 3",
+      "id": "TID-3",
+      "title": "Debug Code",
       "status": "Completed",
       "assignedMember": "Team Member 3",
       "dueDate": "2024-10-15",
       "isAssigned": "No",
       "estimatedHours": "05:00",
       "priorityType": "Medium",
-      "creationDate": "2024-10-08",
-      "order": 1
+      "creationDate": "2024-10-08"
     },
     {
-      "id": "4",
-      "title": "Task 4",
+      "id": "TID-4",
+      "title": "Take a Scrum Call",
       "status": "Completed",
       "assignedMember": "Team Member 2",
       "dueDate": "2024-10-06",
       "isAssigned": "Yes",
       "estimatedHours": "13:15",
       "priorityType": "Low",
-      "creationDate": "2024-10-11",
-      "order": 3
+      "creationDate": "2024-10-11"
     },
     {
-      "id": "5",
-      "title": "task 5",
-      "status": "Uninitiated",
-      "assignedMember": "Team Member 2",
-      "dueDate": "2024-10-05",
-      "isAssigned": "Yes",
-      "estimatedHours": "13:16",
-      "priorityType": "Low",
-      "creationDate": "2024-10-11",
-      "order": 4
-    },
-    {
-      "id": "6",
-      "title": "Task 6",
-      "status": "In Progress",
-      "assignedMember": "Team Member 3",
-      "dueDate": "2024-10-05",
-      "isAssigned": "Yes",
-      "estimatedHours": "18:15",
-      "priorityType": "High",
-      "creationDate": "2024-10-11",
-      "order": 5
-    },
-    {
-      "id": "7",
-      "title": "task 7",
+      "id": "TID-5",
+      "title": "Save Code",
       "status": "Uninitiated",
       "assignedMember": "Team Member 3",
-      "dueDate": "2024-10-06",
+      "dueDate": "2024-10-13",
       "isAssigned": "Yes",
-      "estimatedHours": "13:21",
-      "priorityType": "Low",
-      "creationDate": "2024-10-11",
-      "order": 6
-    },
-    {
-      "id": "8",
-      "title": "Task 8",
-      "status": "Uninitiated",
-      "assignedMember": "Team Member 1",
-      "dueDate": "2024-10-06",
-      "isAssigned": "Yes",
-      "estimatedHours": "19:16",
+      "estimatedHours": "23:43",
       "priorityType": "Medium",
-      "creationDate": "2024-10-11",
-      "order": 7
+      "creationDate": "2024-10-11"
     },
     {
-      "id": "9",
-      "title": "Task 9",
-      "status": "Uninitiated",
-      "assignedMember": "Team Member 1",
-      "dueDate": "2024-10-06",
+      "id": "TID-6",
+      "title": "Push changes to github",
+      "status": "Completed",
+      "assignedMember": "Team Member 4",
+      "dueDate": "2024-10-11",
       "isAssigned": "Yes",
-      "estimatedHours": "13:22",
-      "priorityType": "Low",
-      "creationDate": "2024-10-11",
-      "order": 8
-    },
-    {
-      "id": "10",
-      "title": "Task 10",
-      "status": "Uninitiated",
-      "assignedMember": "Team Member 3",
-      "dueDate": "2024-10-04",
-      "isAssigned": "Yes",
-      "estimatedHours": "13:23",
-      "priorityType": "Low",
-      "creationDate": "2024-10-11",
-      "order": 9
+      "estimatedHours": "23:45",
+      "priorityType": "Medium",
+      "creationDate": "2024-10-11"
     }
   ]
 }

@@ -12,7 +12,7 @@ const Modal = ({ isOpen, onClose,setTaskList,taskList}) => {
     const month = String(currentDate.getMonth() + 1).padStart(2, '0'); // Months are zero-indexed, so we add 1
     const day = String(currentDate.getDate()).padStart(2, '0');
     const formattedDate = `${year }-${month}-${day}`;
-    formObject={...formObject,id:(taskList.length+1).toString(),creationDate:formattedDate}
+    formObject={...formObject,id:'TID-'+(taskList.length+1).toString(),creationDate:formattedDate}
     console.log(formObject);
     const resp=await addToTaskList(formObject);
     if(resp){
