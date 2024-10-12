@@ -26,8 +26,14 @@ const Table=({taskList,setTaskList})=>{
           paginateTasks(resp, currentPage);
         };
         getTasks();
-      }, [currentPage,taskList]);
+      }, [currentPage]);
+
+      useEffect(()=>{
+          paginateTasks(taskList,currentPage);
+      },[taskList]);
+
       const handleDragEnd = async (result) => {
+
         if (!result.destination) {
           return; // Dropped outside the list
         }
@@ -39,7 +45,7 @@ const Table=({taskList,setTaskList})=>{
         const reorderedTasks = Array.from(taskList);
         const [movedTask] = reorderedTasks.splice(sourceIndex, 1);
         reorderedTasks.splice(destinationIndex, 0, movedTask);
-    
+
         setTaskList(reorderedTasks);
     
         // If no filters, paginate the tasks
@@ -90,7 +96,7 @@ const Table=({taskList,setTaskList})=>{
           paginateTasks(taskList, currentPage); // Reset to paginated data when no filters
         }
       };
-    
+
     return(
         <>
         <div className="task-table">
@@ -202,7 +208,7 @@ const Table=({taskList,setTaskList})=>{
                               <td>
                                 <div className="icon-container">
                                   <i className="fa-solid fa-pencil"></i>
-                                  <i className="fa-solid fa-trash"></i>
+                                  <i className="fa-solid fa-trash" onClick={()=>handleTaskDelete(item.id)}></i>
                                 </div>
                               </td>
                             </tr>

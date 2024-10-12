@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
 import TaskModal from './Components/TaskModal';
 import Table from './Components/Table';
+import './App.scss';
 
 function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [taskList, setTaskList] = useState([]);
+  const [taskList, setTaskList] = useState([])
 
    const handleOpenModal = () => {
     setIsModalOpen(true);

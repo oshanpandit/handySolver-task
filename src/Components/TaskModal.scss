@@ -9,7 +9,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 1000;
+    z-index: 10;
   }
   
   .modal-content {
@@ -50,8 +50,8 @@
   }
   
   .submit-btn {
-    background-color: #007bff;
-    color: white;
+    background-color: #FCD19C;
+    color: black;
     border: none;
     padding: 10px;
     border-radius: 4px;
@@ -60,38 +60,6 @@
   }
   
   .submit-btn:hover {
-    background-color: #0056b3;
-  }
-  
-  // pagination 
-  .pagination {
-    display: flex;
-    justify-content: center; // Center the pagination buttons
-    margin: 20px 0; // Add margin for spacing
-  
-    button {
-      background-color: #007bff; // Button color
-      color: white; // Text color
-      border: none; // No border
-      border-radius: 4px; // Rounded corners
-      padding: 10px 15px; // Padding for the button
-      margin: 0 5px; // Spacing between buttons
-      cursor: pointer; // Pointer cursor on hover
-      transition: background-color 0.3s; // Smooth background color transition
-  
-      &:hover {
-        background-color: #0056b3; // Darker shade on hover
-      }
-  
-      &.active {
-        background-color: #0056b3; // Active button color
-        font-weight: bold; // Bold text for active button
-      }
-  
-      &:disabled {
-        background-color: #ccc; // Gray color for disabled buttons
-        cursor: not-allowed; // Not-allowed cursor for disabled buttons
-      }
-    }
+    background-color: #FFA629;
   }
   

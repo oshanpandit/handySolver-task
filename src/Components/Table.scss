@@ -81,3 +81,36 @@
       }
     }
   }
+
+//   pagination
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0; 
+  
+    button {
+      background-color: #FCD19C; 
+      color:black; 
+      border: none; 
+      border-radius: 4px; 
+      padding: 10px 15px; 
+      margin: 0 5px; 
+      cursor: pointer; 
+      transition: background-color 0.3s; 
+      font-weight: 550;
+  
+      &:hover {
+        background-color: #FFA629; 
+      }
+  
+      &.active {
+        background-color: #FFA629;  
+      }
+  
+      &:disabled {
+        background-color: #ccc; 
+        cursor: not-allowed; 
+      }
+    }
+  }
+  

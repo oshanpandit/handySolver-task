@@ -22,6 +22,4 @@ export const addToTaskList = async (payload) => {
   
     const newTask = await resp.json();
     return newTask;
-  };
-
-  
+ };
