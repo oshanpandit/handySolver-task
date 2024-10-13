@@ -1,69 +1,36 @@
 {
   "taskList": [
     {
-      "id": "TID-1",
-      "title": "Make Presentation",
-      "status": "Uninitiated",
-      "assignedMember": "Team Member 2",
-      "dueDate": "2024-10-06",
-      "isAssigned": "Yes",
-      "estimatedHours": "13:16",
-      "priorityType": "Low",
-      "creationDate": "2024-10-10"
-    },
-    {
-      "id": "TID-2",
-      "title": "Brief Client",
-      "status": "In Progress",
+      "title": "Register Client to the crm",
+      "status": "Completed",
       "assignedMember": "Team Member 1",
-      "dueDate": "2024-10-12",
-      "isAssigned": "Yes",
-      "estimatedHours": "08:30",
-      "priorityType": "High",
-      "creationDate": "2024-10-09"
-    },
-    {
-      "id": "TID-3",
-      "title": "Analyse the code",
-      "status": "Uninitiated",
-      "assignedMember": "Team Member 3",
       "dueDate": "2024-10-14",
       "isAssigned": "Yes",
-      "estimatedHours": "11:30",
-      "priorityType": "Medium",
-      "creationDate": "2024-10-13"
-    },
-    {
-      "id": "TID-4",
-      "title": "Take client review",
-      "status": "Uninitiated",
-      "assignedMember": "N/A",
-      "dueDate": "2024-10-25",
-      "isAssigned": "No",
-      "estimatedHours": "17:48",
-      "priorityType": "Medium",
-      "creationDate": "2024-10-13"
-    },
-    {
-      "id": "TID-5",
-      "title": "Do changes",
-      "status": "Uninitiated",
-      "assignedMember": "Team Member 1",
-      "dueDate": "2024-10-26",
-      "isAssigned": "Yes",
-      "estimatedHours": "23:43",
+      "estimatedHours": "02:10",
       "priorityType": "High",
+      "id": "415e",
       "creationDate": "2024-10-13"
     },
     {
-      "id": "TID-6",
-      "title": "Upload final code",
+      "id": "cfae",
+      "title": "Start to code",
       "status": "In Progress",
-      "assignedMember": "Team Member 2",
-      "dueDate": "2024-10-27",
+      "assignedMember": "Team Member 3",
+      "dueDate": "2024-10-18",
       "isAssigned": "Yes",
-      "estimatedHours": "23:43",
+      "estimatedHours": "23:53",
       "priorityType": "High",
+      "creationDate": "2024-10-13"
+    },
+    {
+      "id": "4de5",
+      "title": "Debug code",
+      "status": "Uninitiated",
+      "assignedMember": "Team Member 4",
+      "dueDate": "2024-10-25",
+      "isAssigned": "Yes",
+      "estimatedHours": "00:56",
+      "priorityType": "N/A",
       "creationDate": "2024-10-13"
     }
   ]

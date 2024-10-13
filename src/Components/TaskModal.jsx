@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { addToTaskList } from '../http';
+import { v4 as uuidv4 } from 'uuid';
 import './TaskModal.scss'
+
 const Modal = ({ isOpen, onClose,setTaskList,taskList}) => {
   
   const handleSubmit = async(e) => {
@@ -9,10 +11,10 @@ const Modal = ({ isOpen, onClose,setTaskList,taskList}) => {
     let formObject=Object.fromEntries(formData.entries());
     const currentDate = new Date();
     const year = currentDate.getFullYear();
-    const month = String(currentDate.getMonth() + 1).padStart(2, '0'); // Months are zero-indexed, so we add 1
+    const month = String(currentDate.getMonth() + 1).padStart(2, '0'); 
     const day = String(currentDate.getDate()).padStart(2, '0');
     const formattedDate = `${year }-${month}-${day}`;
-    formObject={...formObject,id:'TID-'+(taskList.length+1).toString(),creationDate:formattedDate}
+    formObject={...formObject,id:uuidv4().slice(0, 4),creationDate:formattedDate}
     console.log(formObject);
     const resp=await addToTaskList(formObject);
     if(resp){

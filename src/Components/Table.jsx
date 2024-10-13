@@ -1,14 +1,17 @@
 import React from "react";
-import { getTaskList } from "../http";
+import { getTaskList,deleteTask } from "../http";
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { useEffect,useState } from "react";
 import Filters from "./Filters";
+import EditModal from "./EditModal";
 import './Table.scss'
 
 const Table=({taskList,setTaskList})=>{
     const [currentPage, setCurrentPage] = useState(1); //stores the value of current page
     const [currentTaskList, setCurrentTaskList] = useState([]);   //currentlist shows the list in accordance to the paginated task
     const [isFiltering, setIsFiltering] = useState(false); // For tracking if filtering is applied
+    const [editModalStatus,setEditModal]=useState(false);
+    const [editTaskIndex,setEditTaskIndex]=useState(null);
     // made to check the current applied filters 
     const [filters, setFilters] = useState({   
       assignedMember: '',
@@ -92,6 +95,23 @@ const Table=({taskList,setTaskList})=>{
         }
       };
 
+      const handleOpenModal = (index) => {
+        setEditTaskIndex(index);
+        setEditModal(true);
+      };
+    
+      const handleCloseModal = () => {
+        setEditModal(false);
+      };
+
+      const handleTaskDelete=async(id)=>{
+           const resp=await deleteTask(id);
+           if(resp){
+            const updatedTaskList = taskList.filter((task) => task.id !==id);
+            setTaskList(updatedTaskList)
+           }
+      }
+
     return(
         <>
         <div className="task-table">
@@ -142,8 +162,8 @@ const Table=({taskList,setTaskList})=>{
                               <td>{item.creationDate}</td>
                               <td>
                                 <div className="icon-container">
-                                  <i className="fa-solid fa-pencil"></i>
-                                  <i className="fa-solid fa-trash" onClick={()=>handleTaskDelete(item.id)}></i>
+                                  <i className="fa-solid fa-pencil" onClick={()=>handleOpenModal(index)}></i>
+                                  <i className="fa-solid fa-trash" onClick={()=>{handleTaskDelete(item.id)}}></i>
                                 </div>
                               </td>
                             </tr>
@@ -173,6 +193,13 @@ const Table=({taskList,setTaskList})=>{
             ))}
           </div>
         )}
+        <EditModal 
+        taskList={taskList}
+        isOpen={editModalStatus}
+        onClose={handleCloseModal}
+        setTaskList={setTaskList}
+        editTaskIndex={editTaskIndex}
+        />
         </>
     )
 }
