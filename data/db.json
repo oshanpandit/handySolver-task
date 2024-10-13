@@ -24,36 +24,47 @@
     },
     {
       "id": "TID-3",
-      "title": "Debug Code",
-      "status": "Completed",
+      "title": "Analyse the code",
+      "status": "Uninitiated",
       "assignedMember": "Team Member 3",
-      "dueDate": "2024-10-15",
-      "isAssigned": "No",
-      "estimatedHours": "05:00",
+      "dueDate": "2024-10-14",
+      "isAssigned": "Yes",
+      "estimatedHours": "11:30",
       "priorityType": "Medium",
-      "creationDate": "2024-10-08"
+      "creationDate": "2024-10-13"
     },
     {
       "id": "TID-4",
-      "title": "Code Evaluation",
+      "title": "Take client review",
       "status": "Uninitiated",
-      "assignedMember": "Team Member 2",
-      "dueDate": "2024-10-13",
-      "isAssigned": "Yes",
-      "estimatedHours": "17:37",
+      "assignedMember": "N/A",
+      "dueDate": "2024-10-25",
+      "isAssigned": "No",
+      "estimatedHours": "17:48",
       "priorityType": "Medium",
-      "creationDate": "2024-10-12"
+      "creationDate": "2024-10-13"
     },
     {
       "id": "TID-5",
-      "title": "New Updated Task",
-      "status": "N/A",
-      "assignedMember": "N/A",
-      "dueDate": "2024-10-13",
-      "isAssigned": "N/A",
-      "estimatedHours": "04:30",
-      "priorityType": "Medium",
-      "creationDate": "2024-10-12"
+      "title": "Do changes",
+      "status": "Uninitiated",
+      "assignedMember": "Team Member 1",
+      "dueDate": "2024-10-26",
+      "isAssigned": "Yes",
+      "estimatedHours": "23:43",
+      "priorityType": "High",
+      "creationDate": "2024-10-13"
+    },
+    {
+      "id": "TID-6",
+      "title": "Upload final code",
+      "status": "In Progress",
+      "assignedMember": "Team Member 2",
+      "dueDate": "2024-10-27",
+      "isAssigned": "Yes",
+      "estimatedHours": "23:43",
+      "priorityType": "High",
+      "creationDate": "2024-10-13"
     }
   ]
 }

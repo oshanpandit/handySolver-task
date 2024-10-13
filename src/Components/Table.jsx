@@ -2,12 +2,15 @@ import React from "react";
 import { getTaskList } from "../http";
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { useEffect,useState } from "react";
+import Filters from "./Filters";
 import './Table.scss'
+
 const Table=({taskList,setTaskList})=>{
-    const [currentPage, setCurrentPage] = useState(1);
-    const [currentTaskList, setCurrentTaskList] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1); //stores the value of current page
+    const [currentTaskList, setCurrentTaskList] = useState([]);   //currentlist shows the list in accordance to the paginated task
     const [isFiltering, setIsFiltering] = useState(false); // For tracking if filtering is applied
-    const [filters, setFilters] = useState({
+    // made to check the current applied filters 
+    const [filters, setFilters] = useState({   
       assignedMember: '',
       creationDate: '',
       dueDate: '',
@@ -23,19 +26,18 @@ const Table=({taskList,setTaskList})=>{
         const getTasks = async () => {
           const resp = await getTaskList();
           setTaskList(resp);
-          paginateTasks(resp, currentPage);
         };
         getTasks();
-      }, [currentPage]);
+      }, []);
 
       useEffect(()=>{
-          paginateTasks(taskList,currentPage);
-      },[taskList]);
+        paginateTasks(taskList,currentPage);
+      },[taskList,currentPage]);
 
       const handleDragEnd = async (result) => {
-
+        
         if (!result.destination) {
-          return; // Dropped outside the list
+          return; 
         }
     
         const startIndex = (currentPage - 1) * itemsPerPage;
@@ -46,14 +48,7 @@ const Table=({taskList,setTaskList})=>{
         const [movedTask] = reorderedTasks.splice(sourceIndex, 1);
         reorderedTasks.splice(destinationIndex, 0, movedTask);
 
-        setTaskList(reorderedTasks);
-    
-        // If no filters, paginate the tasks
-        if (!isFiltering) {
-          paginateTasks(reorderedTasks, currentPage);
-        } else {
-          setCurrentTaskList(reorderedTasks); // Show filtered results without pagination
-        }
+         setTaskList(reorderedTasks);
       };
     
       const paginateTasks = (tasks, page) => {
@@ -80,7 +75,7 @@ const Table=({taskList,setTaskList})=>{
           const filteredTasks = taskList.filter((task) => {
             return Object.keys(currentFilters).every((key) => {
               if (currentFilters[key] === '' || currentFilters[key] === 'Select') {
-                return true; // Skip this filter if it's not set
+                return true; // Skip this filter if it's not set i.e no filteraion
               }
               return task[key].toString().toLowerCase().includes(currentFilters[key].toString().toLowerCase());
             });
@@ -100,7 +95,7 @@ const Table=({taskList,setTaskList})=>{
     return(
         <>
         <div className="task-table">
-          <DragDropContext onDragEnd={handleDragEnd}>
+          <DragDropContext onDragEnd={!isFiltering?handleDragEnd:null}>
             <Droppable droppableId="droppable">
               {(provided) => (
                 <table ref={provided.innerRef} {...provided.droppableProps}>
@@ -119,68 +114,7 @@ const Table=({taskList,setTaskList})=>{
                       <th>Created On</th>
                       <th>Actions</th>
                     </tr>
-                    <tr>
-                      <td>
-                        <i className="fa-solid fa-filter filter-icon"></i>
-                      </td>
-                      <td></td>
-                      <td>
-                        <input
-                          type="text"
-                          placeholder="Search Task Title"
-                          onChange={(e) => filterPipe('title', e.target.value)}
-                        />
-                      </td>
-                      <td>
-                        <input
-                          type="text"
-                          placeholder="Search ID"
-                          onChange={(event) => filterPipe('id', event.target.value)}
-                        />
-                      </td>
-                      <td>
-                        <select onChange={(e) => filterPipe('status', e.target.value)}>
-                          <option>Select</option>
-                          <option>Uninitiated</option>
-                          <option>In Progress</option>
-                          <option>Completed</option>
-                        </select>
-                      </td>
-                      <td>
-                        <select onChange={(event) => filterPipe('assignedMember', event.target.value)}>
-                          <option>Select</option>
-                          <option>Team Member 1</option>
-                          <option>Team Member 2</option>
-                          <option>Team Member 3</option>
-                          <option>Team Member 4</option>
-                        </select>
-                      </td>
-                      <td>
-                        <input type="date" onChange={(event) => filterPipe('dueDate', event.target.value)} />
-                      </td>
-                      <td>
-                        <select onChange={(event) => filterPipe('isAssigned', event.target.value)}>
-                          <option>Select</option>
-                          <option>Yes</option>
-                          <option>No</option>
-                        </select>
-                      </td>
-                      <td>
-                        <input type="time" placeholder="Hours" />
-                      </td>
-                      <td>
-                        <select onChange={(event) => filterPipe('priorityType', event.target.value)}>
-                          <option>Select</option>
-                          <option>Low</option>
-                          <option>Medium</option>
-                          <option>High</option>
-                        </select>
-                      </td>
-                      <td>
-                        <input type="date" onChange={(event) => filterPipe('creationDate', event.target.value)} />
-                      </td>
-                      <td></td>
-                    </tr>
+                    <Filters filterPipe={filterPipe}></Filters>
                   </thead>
                   <tbody>
                     {currentTaskList.length === 0 ? (
@@ -195,6 +129,7 @@ const Table=({taskList,setTaskList})=>{
                               <td {...provided.dragHandleProps}>
                                 <i className="fa-solid fa-bars"></i>
                               </td>
+                              {/* if pagination applied then show the relative order like (1,2,3) else show paginated one */}
                               <td>{isFiltering ? index + 1 : index + 1 + (currentPage - 1) * itemsPerPage}</td>
                               <td>{item.title}</td>
                               <td>{item.id}</td>
